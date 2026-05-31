@@ -1,18 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>E-Commerce Store</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Cart</title>
 </head>
 <body>
 
-<h1>E-Commerce Store</h1>
+<h1>Your Cart</h1>
 
-<div id="products"></div>
+<ul id="cart"></ul>
 
-<a href="cart.html">Go To Cart</a>
+<button onclick="checkout()">
+Checkout
+</button>
 
-<script src="script.js"></script>
+<script>
+
+let cart =
+JSON.parse(localStorage.getItem("cart"))
+|| [];
+
+const cartList =
+document.getElementById("cart");
+
+cart.forEach(item => {
+  cartList.innerHTML += `
+    <li>
+      ${item.name}
+      - ₹${item.price}
+    </li>
+  `;
+});
+
+function checkout() {
+  alert("Order Placed!");
+  localStorage.removeItem("cart");
+  location.reload();
+}
+
+</script>
 
 </body>
 </html>
